@@ -5,6 +5,8 @@
     </head>
     <body>
         <script>
+            // 소수 판별 식
+            // 제곱근 까지만 확인해도 됨.
             function isPrime(num){
                 if(num===1) return false;
                 for(let i=2; i<=parseInt(Math.sqrt(num)); i++){
@@ -12,15 +14,34 @@
                 }
                 return true;
             }
+
+            // 내가 푼거
+            // function solution(arr){
+            //     let answer=[];
+            //     for(let i = 0; i < arr.length; i++){
+            //         if(isPrime(Number(String(arr[i]).split('').reverse().join('')))){
+            //             answer.push(Number(String(arr[i]).split('').reverse().join('')));
+            //         }
+            //     }
+            //     return answer;
+            // }
+            // 강의 풀이
             function solution(arr){
                 let answer=[];
-                for(let i = 0; i < arr.length; i++){
-                    if(isPrime(Number(String(arr[i]).split('').reverse().join('')))){
-                        answer.push(Number(String(arr[i]).split('').reverse().join('')));
+                for(let x of arr){
+                    let tmp = x;
+                    let reverse = 0;
+                    while(tmp){
+                        let t = tmp % 10;
+                        reverse = reverse * 10 + t;
+                        tmp = Math.floor(tmp / 10);
                     }
+
+                    if(isPrime(tmp)) answer.push(tmp);
                 }
                 return answer;
             }
+            
             
             let arr=[32, 55, 62, 20, 250, 370, 200, 30, 100];
             console.log(solution(arr));
