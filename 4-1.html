@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr){
+                let answer = 0;
+                let max=Number.MIN_SAFE_INTEGER;
+                
+                // 내가푼거
+                // arr.map((item) => {
+                //     if(String(item).split('').reduce((a,b) => Number(a) + Number(b)) >= max){
+                //         if(String(item).split('').reduce((a,b) => Number(a) + Number(b)) > max){
+                //             answer = item;
+                //             max = String(item).split('').reduce((a,b) => Number(a) + Number(b));    
+                //         }
+                //         else{
+                //             if(item > answer){
+                //                 answer = item;
+                //             }
+                //         }
+                //     }
+                // })
+
+                // 강의 풀이
+                arr.map((item) => {
+                    // 자연수 직접 구하기
+                    // let sum = 0;
+                    // let tmp = item;
+                    // while(tmp){
+                    //     sum += tmp % 10;
+                    //     tmp = Math.floor(tmp / 10);
+                    // }
+                    
+                    // split reduce
+                    let sum = item.toString().split('').reduce((a, b) => Number(a) + Number(b));
+                    if(sum > max){
+                        max = sum;
+                        answer = item;
+                    }
+                    else if(sum === max){
+                        if(item > answer) answer = item;
+                    }
+                })
+
+                return answer;
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){  
+                let answer=Number.MIN_SAFE_INTEGER;
+                let horizon = 0;
+                let vertical = 0;
+                let leftDiagonal = 0;
+                let rightDiagonal = 0;
+                let horizonMax = Number.MIN_SAFE_INTEGER;
+                let verticalMax = Number.MIN_SAFE_INTEGER;
+                
+                for(let i = 0; i < arr.length; i++){
+                    for(let j = 0; j < arr.length; j++){
+                        horizon += arr[i][j];
+                        vertical += arr[j][i];
+                    }
+                    if(horizon > horizonMax){
+                        horizonMax = horizon;                        
+                    }
+                    if(vertical > verticalMax){
+                        verticalMax = vertical;
+                    }
+                    horizon = 0;
+                    vertical = 0;
+                    leftDiagonal += arr[i][i];
+                    rightDiagonal += arr[i][arr.length - i - 1]
+                }
+                answer = Math.max(horizonMax, verticalMax, leftDiagonal, rightDiagonal);
+
+
+                return answer;
+            }
+
+            let arr=[[10, 13, 10, 12, 15], 
+                     [12, 39, 30, 23, 11],
+                     [11, 25, 50, 53, 15],
+                     [19, 27, 29, 37, 27],
+                     [19, 13, 30, 13, 19]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
